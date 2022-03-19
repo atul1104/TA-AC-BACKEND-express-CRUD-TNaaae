@@ -10,18 +10,18 @@ router.get('/', (req, res, next) => {
     res.render('users.ejs', { users: users });
   });
 });
-router.get('/new', (req, res) => {
+router.get('/new', (req, res, next) => {
   //render the create form
   res.render('userForm.ejs');
 });
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   //capture the form data
-  User.create(req.body, (err, createdUser) => {
+  User.create(req.body, (err, user) => {
     if (err) return res.redirect('/users/new');
     res.redirect('/');
   });
 });
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   //single user detail
   var id = req.params.id;
   User.findById(id, (err, user) => {
@@ -29,8 +29,21 @@ router.get('/:id', (req, res) => {
     res.render('singleUser.ejs', { user });
   });
 });
-router.put('/:id/edit', (req, res) => {
+router.get('/:id/edit', (req, res, next) => {
   //edit form
+  var id = req.params.id;
+  User.findById(id, (err, user) => {
+    if (err) return next(err);
+    res.render('editUser.ejs', { user });
+  });
+});
+router.post('/:id', (req, res, next) => {
+  //edit form
+  var id = req.params.id;
+  User.findByIdAndUpdate(id, req.body, (err, updatedUser) => {
+    if (err) return next(err);
+    res.redirect('/users');
+  });
 });
 router.delete('/:id', (req, res) => {
   //delete the user
