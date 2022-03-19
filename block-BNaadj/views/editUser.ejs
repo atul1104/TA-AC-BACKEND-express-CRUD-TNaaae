@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="flex">
+      <a href="/" class="dis left"> Users </a>
+      <a href="/users/new" class="dis right">Add new User</a>
+    </div>
+    <form action="/users/<%= user.id %>" method="post">
+      <h2>Update User</h2>
+      <input
+        type="text"
+        name="name"
+        placeholder="Enter Name"
+        value="<%= user.name %>"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Enter Email"
+        value="<%= user.email %>"
+      />
+      <input
+        type="number"
+        name="age"
+        placeholder="Enter your Age"
+        value="<%= user.age %>"
+      />
+      <input
+        type="text"
+        name="address"
+        placeholder="Enter your address"
+        value="<%= user.address %>"
+      />
+      <input
+        type="text"
+        name="bio"
+        placeholder="Enter your bio"
+        value="<%= user.bio %>"
+      />
+      <input
+        type="text"
+        name="hobbies"
+        placeholder="Enter your hobbies"
+        value="<%= user.hobbies %>"
+      />
+      <input type="submit" name="submit" value="Update User" />
+    </form>
+  </body>
+</html>
